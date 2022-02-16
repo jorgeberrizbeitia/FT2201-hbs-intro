@@ -1,0 +1,17 @@
+<h3>Estas son las lecciones que daremos</h3>
+
+
+{{!-- {{lessonsKeyName}}
+<br>
+{{lessonsKeyName.0.topic}} --}}
+{{!-- importante, en hbs usamos syntaxis de puntos, no corchetes --}}
+
+{{#each lessonsKeyName}}
+
+  <li>
+    <p>{{topic}}</p>
+    <p>{{description}}</p>
+    <p>{{bootcamp}}</p>
+  </li>
+
+{{/each}}
