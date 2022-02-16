@@ -19,33 +19,54 @@ app.get('/', (req, res) => {
 })
 
 app.get("/about", (req, res) => {
-
   let someObject = {
     name: "Patricio"
   }
-
   res.render("about.hbs", someObject)
 })
 
 // ahora usaremos data de otro modulo
 app.get("/lessons", (req, res) => {
-
-  console.log(lessonsData)
-
   res.render("lessons.hbs", {
     lessonsKeyName: lessonsData
+  })
+})
+
+app.get("/approved-lessons", (req, res) => {
+  const filteredData = lessonsData.filter((eachElem) => {
+    return eachElem.approved === true
+  })
+  res.render("lessons.hbs", {
+    lessonsKeyName: filteredData
+  })
+})
+
+// params
+app.get("/lessons-per-bootcamp/:bootcamp", (req, res) => {
+
+  console.log(req.params.bootcamp)
+
+  const filteredLessons = lessonsData.filter((eachLesson) => {
+    return eachLesson.bootcamp === req.params.bootcamp
+  })
+
+  res.render("lessons.hbs", {
+    lessonsKeyName: filteredLessons
   })
 
 })
 
-app.get("/approved-lessons", (req, res) => {
+// queries
+app.get("/search", (req, res) => {
 
-  const filteredData = lessonsData.filter((eachElem) => {
-    return eachElem.approved === true
+  console.log(req.query)
+
+  const searchLesson = lessonsData.find((eachElem) => {
+    return eachElem.topic === req.query.search
   })
 
-  res.render("lessons.hbs", {
-    lessonsKeyName: filteredData
+  res.render("search.hbs", {
+    searchLesson: searchLesson
   })
 
 })
