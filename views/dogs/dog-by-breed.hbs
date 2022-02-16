@@ -1,0 +1,11 @@
+<h2>Todas las imagenes por raza</h2>
+
+{{#each data.message}}
+
+  {{!-- <h3>Esta es la imagen</h3>
+  <img src="{{this}}" alt="dog" width="300px">
+  <p>el mejor perro 10/10</p> --}}
+
+  {{>dogpartial this}}
+
+{{/each}}
